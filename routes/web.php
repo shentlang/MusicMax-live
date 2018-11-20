@@ -26,7 +26,10 @@ Route::get('/mi_primera_ruta',function(){
 	return 'hola prros';
 });
 
-Route::get('prueba/{name}','PruebaController@prueba');
+Route::get('/busqueda_artista','PruebaController@prueba');
+Route::get('/musica','PruebaController@music');
 
 Route::resource('artistas','ArtistasController');
+
+Route::post('artistas','ArtistasController@busqueda')->name('buscar');
 

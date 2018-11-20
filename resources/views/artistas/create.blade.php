@@ -2,7 +2,7 @@
 
 @section('title','Registrando artistas')
 @section('content')
-<form class=form-group" method="POST" action="/artistas" enctype="multipart/form-data">
+<form class=form-group" method="POST" action="{{ route('artistas.create') }}" enctype="multipart/form-data">
 	
 	@csrf
 
@@ -18,6 +18,13 @@
 <div class="form-group">
  <label for="">avatar</label>	
  <input type="file" name="avatar" >
+</div> 
+<div class="form-group">
+ <label for="">descripcion</label>	
+ <textarea type="texr" rows="4" cols="50" name="descripcion" class="form-control"></textarea>
+ 
+ 
+
 </div> 
 
 <button type="submit" class="btn btn-primary">Guardar</button>

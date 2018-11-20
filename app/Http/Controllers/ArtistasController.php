@@ -4,7 +4,7 @@ namespace MusicMax\Http\Controllers;
 
 use MusicMax\artista;
 use Illuminate\Http\Request;
-
+use DB;
 class ArtistasController extends Controller
 {
     /**
@@ -12,12 +12,28 @@ class ArtistasController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index( )
     {
         //
 
      //  return 'hola desde el controlador ';
-        $artistas = Artista::all();
+$artistas = DB::table('artistas')
+                ->where('name', 'like', '%%')
+                ->get();
+              return view('artistas.index',compact('artistas'));   
+       
+       
+    }
+     public function busqueda(Request $request)
+    {
+        //
+
+     //  return 'hola desde el controlador ';
+$artistas = DB::table('artistas')
+                ->where('name', 'like', '%'.$request->input('busqueda').'%')
+                ->get();
+
+       // $artistas = Artista::all();
        return view('artistas.index',compact('artistas'));
     }
 
@@ -52,6 +68,7 @@ $file->move(public_path().'/images/', $name);
         $artista->name = $request->input('name');
         $artista->genero = $request->input('genero');
         $artista->avatar = $name;
+        $artista->descripcion = $request->input('descripcion');
      $artista->save();
      //return $request->input('name');
         //return $request;
@@ -66,6 +83,10 @@ $file->move(public_path().'/images/', $name);
     public function show($id)
     {
         //
+       //return view('artistas.musica');
+        //return 'asdasd'.$id;
+        $artistas = Artista::find($id);
+       return view('artistas.musica',compact('artistas'));  
     }
 
     /**
@@ -74,9 +95,9 @@ $file->move(public_path().'/images/', $name);
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit()
     {
-        //
+        
     }
 
     /**
